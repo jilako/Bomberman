@@ -23,7 +23,21 @@ void explosion(bomb b, int k, player* p, player* p1, player* p2, Map* map,bomb *
                    |                                          |
                    |                                          |
                    --------------------------------------------*/
-
+                   int b1_x=p1->x+p1->boundX+BLOCK_WIDTH*i;
+                   int b1_y=p1->y+p1->boundY;
+                   int b1_w=p1->width;
+                   int b1_h=p1->height;
+                   int b2_x=b.x;
+                   int b2_y=b.y;
+                   int b2_w=BLOCK_WIDTH;
+                   int b2_h=BLOCK_HEIGHT;
+            if ((b1_x < b2_x + b2_w ) && 
+                    (b1_y < b2_y + b2_h ) && 
+                    (b2_x < b1_x + b1_w ) && 
+                    (b2_y < b1_y + b1_h ))  
+                {
+                    printf("YOOOOLOOO \n");
+                }
                 //si la case à l'est n'est pas un bloc indestructible
                 if(map->contents[(b.x)/BLOCK_WIDTH+i][(b.y)/BLOCK_HEIGHT]->inde!=1){
 
@@ -76,6 +90,21 @@ void explosion(bomb b, int k, player* p, player* p1, player* p2, Map* map,bomb *
             
             }
             for(i=0 ; i<=p->strength ; i++){
+                              int b1_x=p1->x+p1->boundX-BLOCK_WIDTH*i;
+                   int b1_y=p1->y+p1->boundY;
+                   int b1_w=p1->width;
+                   int b1_h=p1->height;
+                   int b2_x=b.x;
+                   int b2_y=b.y;
+                   int b2_w=BLOCK_WIDTH;
+                   int b2_h=BLOCK_HEIGHT;
+            if ((b1_x < b2_x + b2_w ) && 
+                    (b1_y < b2_y + b2_h ) && 
+                    (b2_x < b1_x + b1_w ) && 
+                    (b2_y < b1_y + b1_h ))  
+                {
+                    printf("YOOOOLOOO \n");
+                }
                 if(map->contents[(b.x)/BLOCK_WIDTH-i][(b.y)/BLOCK_HEIGHT]->inde!=1){
                     if((b.x)/BLOCK_WIDTH-i==(p1->x+p1->boundX)/BLOCK_WIDTH && (b.y)/BLOCK_HEIGHT==(p1->y+p1->boundY)/BLOCK_HEIGHT){
                         
@@ -121,6 +150,28 @@ void explosion(bomb b, int k, player* p, player* p1, player* p2, Map* map,bomb *
                    --------------------------------------------*/
 
             for(i=0 ; i<=p->strength ; i++){
+                              int b1_x=p1->x+p1->boundX;
+                   int b1_y=p1->y+p1->boundY+BLOCK_HEIGHT*i;
+                   int b1_w=p1->width;
+                   int b1_h=p1->height;
+                   int b2_x=b.x;
+                   int b2_y=b.y;
+                   int b2_w=BLOCK_WIDTH;
+                   int b2_h=BLOCK_HEIGHT;
+            if ((b1_x < b2_x + b2_w ) && 
+                    (b1_y < b2_y + b2_h ) && 
+                    (b2_x < b1_x + b1_w ) && 
+                    (b2_y < b1_y + b1_h ))  
+                {
+                     if(p1->spe.num==2 && p1->spe.active==1){
+                        p1->dead=0;
+                        } else {
+                            p1->dead=1;
+                            playSound(soundDeath);
+                            p1->x=-200;
+                            p1->y=-200;
+                        }
+                }
                 if(map->contents[(b.x)/BLOCK_WIDTH][(b.y)/BLOCK_HEIGHT+i]->inde!=1 ){
                     if((b.x)/BLOCK_WIDTH==(p1->x+p1->boundX)/BLOCK_WIDTH && (b.y)/BLOCK_HEIGHT+i==(p1->y+p1->boundY)/BLOCK_HEIGHT){
                         
@@ -165,7 +216,28 @@ void explosion(bomb b, int k, player* p, player* p1, player* p2, Map* map,bomb *
                    |                                          |
                    |                                          |
                    --------------------------------------------*/
-
+                    int b1_x=p1->x+p1->boundX;
+                   int b1_y=p1->y+p1->boundY-BLOCK_HEIGHT*i;
+                   int b1_w=p1->width;
+                   int b1_h=p1->height;
+                   int b2_x=b.x;
+                   int b2_y=b.y;
+                   int b2_w=BLOCK_WIDTH;
+                   int b2_h=BLOCK_HEIGHT;
+            if ((b1_x < b2_x + b2_w ) && 
+                    (b1_y < b2_y + b2_h ) && 
+                    (b2_x < b1_x + b1_w ) && 
+                    (b2_y < b1_y + b1_h ))  
+                {
+                     if(p->spe.num==2 && p->spe.active==1){
+                        p->dead=0;
+                        } else {
+                            p->dead=1;
+                            playSound(soundDeath);
+                            p->x=-200;
+                            p->y=-200;
+                        }
+                }
             for(i=0 ; i<=p->strength ; i++){
                 if(map->contents[(b.x)/BLOCK_WIDTH][(b.y)/BLOCK_HEIGHT-i]->inde!=1){
                     if((b.x)/BLOCK_WIDTH==(p->x+p->boundX)/BLOCK_WIDTH && (b.y)/BLOCK_HEIGHT-i==(p->y+p->boundY)/BLOCK_HEIGHT){
