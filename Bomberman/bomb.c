@@ -285,6 +285,7 @@ void initialiseBomb(bomb *kaboom,player *p,int x,int y){
 	kaboom->flaming=0;
 }
 void trigger(bomb *kaboom, int active){
+  
 	char *soundBombPlacement="effects/placementBomb.wav";
 	kaboom->active=active;
 	playSound(soundBombPlacement);

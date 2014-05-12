@@ -31,7 +31,7 @@ typedef struct {
 	int maxFrameWait;
 	int maxFrameWalk;
 	int dead;
-	bool hasUsed;
+	int hasUsed;
 } player;
 
 

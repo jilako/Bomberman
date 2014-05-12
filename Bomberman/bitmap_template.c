@@ -92,6 +92,7 @@ int main(void)
         //TEXT
     ALLEGRO_BITMAP *text;
     ALLEGRO_BITMAP *text2;
+    ALLEGRO_BITMAP *text3;
     ALLEGRO_BITMAP *winner;
     //DOGE
     ALLEGRO_BITMAP *doge;
@@ -461,6 +462,7 @@ int main(void)
     aura[15]=al_load_bitmap("aura/blue aura0015.bmp");
     text=al_load_bitmap("bombs/text.jpg");
     text2=al_load_bitmap("bombs/text2.jpg");
+    text3=al_load_bitmap("bombs/text3.jpg");
 //Transparence en mettant des masques sur les images pour faire disparaître les fonds
     for( i = 0; i < SoulMaxFrame; i++){
         if(i<DwarfmaxFrameWait){
@@ -610,28 +612,29 @@ int main(void)
     {
         al_draw_bitmap(dreams,100,0,0);
         if(choix==0){
-            al_draw_bitmap(bomb[0],325,335,0);
+            al_draw_bitmap(bomb[0],235,335,0);
         }
         else if (choix == 1){
-            al_draw_bitmap(bomb[0],440,335,0);
+            al_draw_bitmap(bomb[0],360,335,0);
         }
         else{
-            al_draw_bitmap(bomb[0],570,335,0);
+            al_draw_bitmap(bomb[0],490,335,0);
         }
         if(choix2==0){
-            al_draw_bitmap(bomb[10],325,335,0);
+            al_draw_bitmap(bomb[10],235,335,0);
         }
         else if(choix2==1){
-            al_draw_bitmap(bomb[10],440,335,0);
+            al_draw_bitmap(bomb[10],360,335,0);
         }
         else if (choix2==2){
-            al_draw_bitmap(bomb[10],570,335,0);
+            al_draw_bitmap(bomb[10],490,335,0);
         }
-        al_draw_bitmap(text,305,370,0);
-        al_draw_bitmap(text2,430,370,0);
-        al_draw_bitmap(dwarfWaitingSouth[DwarfCurFrameWaiting],300, 260, 0);
-        al_draw_bitmap(soulSouth[SoulCurFrame],400,250,0);
-        al_draw_bitmap(ninjaSouth[NinjaCurFrame],550,260,0);
+        al_draw_bitmap(text,225,370,0);
+        al_draw_bitmap(text2,350,370,0);
+         al_draw_bitmap(text3,480,370,0);
+        al_draw_bitmap(dwarfWaitingSouth[DwarfCurFrameWaiting],200, 260, 0);
+        al_draw_bitmap(soulSouth[SoulCurFrame],320,250,0);
+        al_draw_bitmap(ninjaSouth[NinjaCurFrame],470,260,0);
         al_flip_display();
         al_clear_to_color(al_map_rgb(250,250,250));
         redraw=false;
@@ -1128,6 +1131,7 @@ if(redraw && al_is_event_queue_empty(event_queue)) {
         for ( i =0;i<8;i++){
             //si la bombe est active et le joueur a qui elle appartient vivant
             if(Bombes[i]->active==1 && ((i<4 && p1->dead == 0) || (i>3 && p2->dead == 0))){
+
                 al_draw_bitmap(bomb[bomb_frame],Bombes[i]->x,Bombes[i]->y,0);
                 bomb_frame++;
                 if(bomb_frame>15) bomb_frame=0;
@@ -1241,7 +1245,7 @@ if(redraw && al_is_event_queue_empty(event_queue)) {
                     p1->spe.active=0;
                     capacityON=false;
                     p1->speed=2; //après avoir sprintré, le nain est fatigué.
-                    p1->hasUsed=true;
+                    p1->hasUsed=1;
                 }   
             } else if(p1->spe.num==2){
                 p1->spe.capacityTimer--;
@@ -1252,7 +1256,7 @@ if(redraw && al_is_event_queue_empty(event_queue)) {
                 }
                 if(p1->spe.capacityTimer<=0){
                     p1->spe.active=0;
-                    p1->hasUsed=true;
+                    p1->hasUsed=1;
                 }
             }
             else if(p1->spe.num==3){
@@ -1267,7 +1271,7 @@ if(redraw && al_is_event_queue_empty(event_queue)) {
 
                     reverse(p1,p2);
                     p1->spe.active=0;
-                    p1->hasUsed=true;
+                    p1->hasUsed=1;
                 }
             }
 
@@ -1282,7 +1286,7 @@ if(redraw && al_is_event_queue_empty(event_queue)) {
                     p2->spe.active=0;
                     capacityON=false;
                     p2->speed=2;
-                    p2->hasUsed=true;
+                    p2->hasUsed=1;
                 }   
             } else if(p2->spe.num==2){
                 p2->spe.capacityTimer--;
@@ -1293,32 +1297,32 @@ if(redraw && al_is_event_queue_empty(event_queue)) {
                 }
                 if(p2->spe.capacityTimer<=0){
                     p2->spe.active=0;
-                    p2->hasUsed=true;
+                    p2->hasUsed=1;
                 }
             }
             else if(p2->spe.num==3){
                 p2->spe.capacityTimer--;
-              al_draw_bitmap(aura[auraFrame],p1->x,p1->y+15,0);
-              al_draw_bitmap(aura[auraFrame],p2->x,p2->y+15,0);
-              auraFrame++;
-              if(auraFrame>15){
-                auraFrame=0;
-            }
-            if(p2->spe.capacityTimer<=0){
+                al_draw_bitmap(aura[auraFrame],p1->x,p1->y+15,0);
+                al_draw_bitmap(aura[auraFrame],p2->x,p2->y+15,0);
+                auraFrame++;
+                if(auraFrame>15){
+                    auraFrame=0;
+                }
+                if(p2->spe.capacityTimer<=0){
 
-                reverse(p1,p2);
-                p1->spe.active=0;
-                p1->hasUsed=true;
+                    reverse(p1,p2);
+                    p1->spe.active=0;
+                    p1->hasUsed=1;
+                }
             }
+
+
         }
-
-
+        al_flip_display();
     }
-    al_flip_display();
-}
-if(p1->dead == 1 || p2->dead == 1){
-    done=true;
-}
+    if(p1->dead == 1 || p2->dead == 1){
+        done=true;
+    }
 }
 done = false;
 event_queue_fin=al_create_event_queue();
@@ -1595,7 +1599,6 @@ void placeBomb(player *p,bomb *bombs[],Mur *murs[][15],int width,int height,int 
                 //on cherche la premiere bombe inactive et on l'active
             for (i=0+numplayer*4; i < p->bombCapacity+numplayer*4;i++){
                 if(bombs[i]->active==0){
-
                     bombs[i]->x=murs[x][y+1]->boundX;
                     bombs[i]->y=murs[x][y+1]->boundY+10;
 
