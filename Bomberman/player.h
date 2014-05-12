@@ -1,8 +1,7 @@
 #ifndef player_h
 #define player_h
-//pma=black dwarf - bob - He be sprinting
-//damien=Flying Soul - Icaryss - He be no dying
-enum characterChosen {FlyingSoul, BlackDwarf, PersoRomain };
+
+enum characterChosen {FlyingSoul, BlackDwarf, Ninja };
 enum specialAttack {speAtt1, speAtt2, speAtt3};
 enum orientationPerso {north, east, south, west};
 
@@ -32,10 +31,11 @@ typedef struct {
 	int maxFrameWait;
 	int maxFrameWalk;
 	int dead;
+	bool hasUsed;
 } player;
 
 
 
 void initialisePlayer(player *p,int number,int x,int y);
-
+void reverse(player *p1,player* p2);
 #endif
